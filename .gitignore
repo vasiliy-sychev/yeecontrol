@@ -1,0 +1,9 @@
+yeecontrol/Debug/
+yeecmd/Debug/
+Debug/
+yeecontrol/Release/
+yeecmd/Release/
+Release/
+ipch/
+*.user
+*.sdf

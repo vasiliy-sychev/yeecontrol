@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yeecontrol", "yeecontrol\yeecontrol.vcxproj", "{9C9694D4-0940-4D6F-94F1-225A60CDE2D9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yeecmd", "yeecmd\yeecmd.vcxproj", "{33B1F0DB-6206-48B5-B222-74433DED6064}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C9694D4-0940-4D6F-94F1-225A60CDE2D9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9C9694D4-0940-4D6F-94F1-225A60CDE2D9}.Debug|Win32.Build.0 = Debug|Win32
+		{9C9694D4-0940-4D6F-94F1-225A60CDE2D9}.Release|Win32.ActiveCfg = Release|Win32
+		{9C9694D4-0940-4D6F-94F1-225A60CDE2D9}.Release|Win32.Build.0 = Release|Win32
+		{33B1F0DB-6206-48B5-B222-74433DED6064}.Debug|Win32.ActiveCfg = Debug|Win32
+		{33B1F0DB-6206-48B5-B222-74433DED6064}.Debug|Win32.Build.0 = Debug|Win32
+		{33B1F0DB-6206-48B5-B222-74433DED6064}.Release|Win32.ActiveCfg = Release|Win32
+		{33B1F0DB-6206-48B5-B222-74433DED6064}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
