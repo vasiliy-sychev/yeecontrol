@@ -55,7 +55,7 @@ int BeginList(JSONQUERY *query, char *name)
 		return 1;
 
 	case QUERY_INITIALIZED:
-		newDataLen = (int) strlen(name) + 4;
+		newDataLen = (int) strlen(name) + 4; /* Length of block name + "":[ */
 
 		if(query->bufferSize - i < newDataLen + 1)
 		{
@@ -68,7 +68,7 @@ int BeginList(JSONQUERY *query, char *name)
 
 	case ITEM_ADDED:
 	case LIST_CLOSED:
-		newDataLen = (int) strlen(name) + 5;
+		newDataLen = (int) strlen(name) + 5; /* Length of block name + ,"":[ */
 
 		if(query->bufferSize - i < newDataLen + 1)
 		{
@@ -218,51 +218,6 @@ int WriteNumber(JSONQUERY *query, char *name, int number)
 		break;
 	}
 
-#ifdef OLD_CODE
-	if(query->state == NO_BUFFER_SPACE)
-		return 1;
-
-	if(query->state == QUERY_FINALIZED) /* After EndQuery() we must ignore all calls */
-		return 0;
-
-	itoa(number, itoaOutBuffer, 10);
-
-	if(query->state == ITEM_ADDED)
-	{
-		newDataLen = (int) (strlen(name) + strlen(itoaOutBuffer) + 4);
-
-		if(query->bufferSize - i < newDataLen + 1)
-		{
-			query->state = NO_BUFFER_SPACE;
-			return 1;
-		}
-
-		query->buffer[i++] = ',';
-		query->buffer[i++] = '\"';
-	}
-	else
-	{
-		newDataLen = (int) (strlen(name) + strlen(itoaOutBuffer) + 3);
-
-		if(query->bufferSize - i < newDataLen + 1)
-		{
-			query->state = NO_BUFFER_SPACE;
-			return 1;
-		}
-
-		query->buffer[i++] = '\"';
-	}
-
-	while(*name != '\0')
-	{
-		query->buffer[i++] = *name;
-		name++;
-	}
-
-	query->buffer[i++] = '\"';
-	query->buffer[i++] = ':';
-#endif
-
 	while(itoaOutBuffer[bp] != '\0') /* Let's append number */
 	{
 		query->buffer[i++] = itoaOutBuffer[bp];
@@ -312,7 +267,7 @@ int WriteString(JSONQUERY *query, char *name, char *string)
 
 	case ITEM_ADDED:
 	case LIST_CLOSED:
-		newDataLen = (int) (strlen(name) + strlen(string) + 6); /* */
+		newDataLen = (int) (strlen(name) + strlen(string) + 6); /* Length of name + ,"":"" */
 
 		if(query->bufferSize - i < newDataLen + 1)
 		{
