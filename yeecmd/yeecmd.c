@@ -10,9 +10,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "json_query.h" /* file from ../yeecontrol/ */
+#include "json_query.h" /* files from ../yeecontrol/ */
+#include "util.h"
 
-
+/* Command line arguments */
 #define ARGV_EXE_NAME	0
 #define ARGV_IP_ADDR	1
 #define ARGV_COMMAND	2
@@ -21,16 +22,15 @@
 #define ARGV_GREEN		4
 #define ARGV_BLUE		5
 
-
+/* I/O buffer size */
 #define COMMAND_BUFFER_SIZE 100
 
-
+/* Values from YeeLink documentation, do not modify! */
 #define MIN_BRIGHTNESS 1
 #define MAX_BRIGHTNESS 100
 
 #define MIN_COLOR_TEMP 1700
 #define MAX_COLOR_TEMP 6500
-
 
 void GenSetBrightRequest(char *buffer, int bufSize, int brightness)
 {
@@ -152,28 +152,6 @@ void PrintUsage()
 	wprintf(L"       toggle\n\n");
 }
 
-unsigned long ArgumentToAddr(wchar_t *wcIP)
-{
-	int wcLen;
-	int wctombResult;
-	char outputBuffer[20];
-
-	wcLen = (int) wcslen(wcIP);
-
-	if(wcLen > 15) /* AAA.BBB.CCC.DDD can't be longer than 15 chars */
-		return INADDR_NONE;
-
-	wctombResult = WideCharToMultiByte(CP_ACP, 0, wcIP, wcLen, outputBuffer, 20, NULL, NULL);
-
-	if(wctombResult == wcLen)
-	{	
-		outputBuffer[wcLen] = '\0';
-		return inet_addr(outputBuffer);
-	}
-
-	return INADDR_NONE;
-}
-
 int wmain(int argc, wchar_t **argv, wchar_t **envp)
 {
 	char buffer[COMMAND_BUFFER_SIZE];
@@ -276,7 +254,7 @@ int wmain(int argc, wchar_t **argv, wchar_t **envp)
 		return 1;
 	}
 
-	addr = ArgumentToAddr(argv[ARGV_IP_ADDR]);
+	addr = WCStringToAddr(argv[ARGV_IP_ADDR]);
 
 	if(addr == INADDR_ANY || addr == INADDR_NONE)
 	{

@@ -80,10 +80,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\yeecontrol\json_query.c" />
+    <ClCompile Include="..\yeecontrol\util.c" />
     <ClCompile Include="yeecmd.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\yeecontrol\json_query.h" />
+    <ClInclude Include="..\yeecontrol\util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
